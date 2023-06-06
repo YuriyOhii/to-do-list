@@ -8,7 +8,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "parcel src/index.html build --public-url /to-do-list/"
+    "build": "parcel build src/index.html --public-url /to-do-list/"
   },
   "keywords": [],
   "author": "",
@@ -16,4 +16,5 @@
   "devDependencies": {
     "parcel": "^2.9.1"
   }
-}
+};
+
