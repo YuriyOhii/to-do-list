@@ -8,20 +8,35 @@ function onAddBtnClick() {
   const text = refs.input.value;
   createTaskEl({ text });
   addTaskToLocalStorage({ text });
+
 }
 
 function handleListClick({ target }) {
-  if (target.nodeName === "LI") target.classList.toggle("checked");
-  else target.parentNode.remove();
+  const currentSavedData = loadFromLocalStorage(STORAGE_KEY);
+
+  if (target.nodeName === "LI") {
+    target.classList.toggle("checked");
+    const checkedTask = currentSavedData.find(
+      taskObj => Number(target.dataset.id) === Number(taskObj.id)
+    );
+       checkedTask.isDone = !checkedTask.isDone;
+  } else {
+    target.parentNode.remove();
+    const removeItemIndex = currentSavedData.findIndex(
+      (taskObj) => Number(target.parentNode.dataset.id) === Number(taskObj.id)
+    );
+    currentSavedData.splice(removeItemIndex, 1);
+  }
+
+  saveToLocalStorage(STORAGE_KEY, currentSavedData);
 }
 
 function addTaskToLocalStorage({ text, isDone = false, id = currentId }) {
+    if (text.trim() === "") return;
   let currentSavedData = loadFromLocalStorage(STORAGE_KEY);
-  if (currentSavedData === undefined)
-    currentSavedData = [{ text, isDone, id }];
+  if (currentSavedData === undefined) currentSavedData = [{ text, isDone, id }];
   else currentSavedData.push({ text, isDone, id });
   saveToLocalStorage(STORAGE_KEY, currentSavedData);
-  console.log(currentSavedData);
   currentId += 1;
 }
 
@@ -32,6 +47,7 @@ function createTaskEl({ text, isDone = false, id = currentId }) {
     alert("Task name should contains at least one character");
     return;
   }
+  
   const taskEl = document.createElement("li");
   taskEl.textContent = text;
   if (isDone) taskEl.classList.add("checked");
@@ -39,6 +55,7 @@ function createTaskEl({ text, isDone = false, id = currentId }) {
   addCloseButton(taskEl);
   refs.list.appendChild(taskEl);
   resetInput();
+
 }
 
 function addCloseButton(target) {
@@ -49,4 +66,11 @@ function addCloseButton(target) {
   target.appendChild(span);
 }
 
-export { onAddBtnClick, handleListClick };
+function randerElementsWhenRestart() {
+    const currentSavedData = loadFromLocalStorage(STORAGE_KEY);
+        if (currentSavedData === undefined) return;
+            currentSavedData.forEach(createTaskEl);
+            currentId = currentSavedData[currentSavedData.length -1].id +1
+}
+
+export { onAddBtnClick, handleListClick, randerElementsWhenRestart };

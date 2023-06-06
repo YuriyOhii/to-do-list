@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "to-do-list",
   "main": "index.js",
+  
+  "homepage": "https://yuriyohii.github.io/to-do-list/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "parcel build "
+    "build": "parcel build --public-url /to-do-list/"
   },
   "keywords": [],
   "author": "",
