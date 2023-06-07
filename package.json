@@ -2,22 +2,24 @@
   "name": "to-do-list",
   "version": "1.0.0",
   "description": "to-do-list",
-  
   "homepage": "https://yuriyohii.github.io/to-do-list/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url /to-do-list/"
+    "build": "parcel build src/index.html --public-url /to-do-list"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YuriyOhii/to-do-list"
+    "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yura Ohii <uaogiy@gmail.com>",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goitacademy/parcel-project-template/issues"
+  },
   "devDependencies": {
     "parcel": "^2.9.1"
-  }
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }
-
